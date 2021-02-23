@@ -2,31 +2,34 @@
 #define STUDENT_H
 
 #include <string>
-#include <vector>
+
+#include "degree.h"
 
 class Student {
 	public:
-		Student(std::string studentID = "none", std::string firstName = "none", std::string lastName = "none", 
-			std::string emailAddress = "none", int studentAge = -1, std::vector<int> daysToCompleteCourses = {},
-			std::string degreeProgram = "none");
+		Student(std::string studentID = "none", std::string firstName = "none", std::string lastName = "none",
+				std::string emailAddress = "none", int studentAge = -1, int daysInCourse1 = -1, 
+				int daysInCourse2 = -1, int daysInCourse3 = -1, DegreeProgram degreeProgram = NONE);
 
 		void SetStudentID(std::string studentID);
 		void SetFirstName(std::string firstName);
 		void SetLastName(std::string lastName);
 		void SetEmailAddress(std::string lastName);
 		void SetStudentAge(int studentAge);
-		void SetdaysToCompleteCourses(std::vector<int> &daysToCompleteCourses);
-		void SetDegreeProgram(std::string degreeProgram);
+		void SetDaysInCourses(int course1, int course2, int course3);
+		void SetDegreeProgram(DegreeProgram degreeProgram);
 
 		std::string GetStudentId() const;
 		std::string GetFirstName() const;
 		std::string GetLastName() const;
 		std::string GetEmailAddress() const;
 		int GetStudentAge() const;
-		std::vector<int> GetDaysToCompleteCourses() const;
-		std::string GetDegreeProgram() const;
+		int GetDaysInCourse1() const;
+		int GetDaysInCourse2() const;
+		int GetDaysInCourse3() const;
+		DegreeProgram GetDegreeProgram() const;
 
-		// Implement a Print() function which can print specific student data
+		void Print() const;
 
 	private:
 		std::string studentID;
@@ -34,8 +37,10 @@ class Student {
 		std::string lastName;
 		std::string emailAddress;
 		int studentAge;
-		std::vector<int> daysToCompleteCourses;
-		std::string degreeProgram; // Might need to turn this into a degree object instead of just a string
+		int daysInCourse1;
+		int daysInCourse2;
+		int daysInCourse3;
+		DegreeProgram degreeProgram;
 };
 
 #endif

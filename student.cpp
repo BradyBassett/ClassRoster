@@ -1,17 +1,19 @@
 #include <string>
-#include <vector>
+#include <iostream>
 
 #include "student.h"
 
 Student::Student(std::string studentID, std::string firstName, std::string lastName,
-				 std::string emailAddress, int studentAge, std::vector<int> daysToCompleteCourses,
-				 std::string degreeProgram) {
+				 std::string emailAddress, int studentAge, int daysInCourse1,
+				 int daysInCourse2, int daysInCourse3, DegreeProgram degreeProgram) {
 	this->studentID = studentID;
 	this->firstName = firstName;
 	this->lastName = lastName;
 	this->emailAddress = emailAddress;
 	this->studentAge = studentAge;
-	this->daysToCompleteCourses = daysToCompleteCourses;
+	this->daysInCourse1 = daysInCourse1;
+	this->daysInCourse2 = daysInCourse2;
+	this->daysInCourse3 = daysInCourse3;
 	this->degreeProgram = degreeProgram;
 
 	return;
@@ -47,13 +49,15 @@ void Student::SetStudentAge(int studentAge) {
 	return;
 }
 
-void Student::SetdaysToCompleteCourses(std::vector<int> &daysToCompleteCourses) {
-	this->daysToCompleteCourses = daysToCompleteCourses;
+void Student::SetDaysInCourses(int course1, int course2, int course3) {
+	this->daysInCourse1 = course1;
+	this->daysInCourse2 = course2;
+	this->daysInCourse3 = course3;
 
 	return;
 }
 
-void Student::SetDegreeProgram(std::string degreeProgram) {
+void Student::SetDegreeProgram(DegreeProgram degreeProgram) {
 	this->degreeProgram = degreeProgram;
 
 	return;
@@ -79,10 +83,34 @@ int Student::GetStudentAge() const {
 	return this->studentAge;
 }
 
-std::vector<int> Student::GetDaysToCompleteCourses() const {	
-	return this->daysToCompleteCourses;
+int Student::GetDaysInCourse1() const {	
+	return this->daysInCourse1;
 }
 
-std::string Student::GetDegreeProgram() const {
+int Student::GetDaysInCourse2() const {
+	return this->daysInCourse2;
+}
+
+int Student::GetDaysInCourse3() const {
+	return this->daysInCourse3;
+}
+
+DegreeProgram Student::GetDegreeProgram() const {
 	return this->degreeProgram;
+}
+
+void Student::Print() const {
+	int courses[]{ this->daysInCourse1, this->daysInCourse2, this->daysInCourse3 };
+
+	std::cout << "StudentID: " << this->studentID << std::endl;
+	std::cout << "Student Name: " << this->firstName << " " << this->lastName << std::endl;
+	std::cout << "Student Email Address: " << this->emailAddress << std::endl;
+	std::cout << "Student Age: " << this->studentAge << std::endl;
+	std::cout << "Days in Each Course: " << std::endl;
+	for (int i = 0; i < 3; i++) {
+		std::cout << "Course " << i << ": " << courses[i] << std::endl;
+	}
+	std::cout << "Degree Program: " << this->degreeProgram << std::endl;
+
+	return;
 }
