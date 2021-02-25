@@ -9,6 +9,9 @@
 
 class Roster {
 	public:
+		Roster();
+		Roster(const Roster& source);
+		Roster& operator=(const Roster& source);
 		~Roster();
 
 		void Add(std::string studentID, std::string firstName, std::string lastName, 

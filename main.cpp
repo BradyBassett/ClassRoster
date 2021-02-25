@@ -13,14 +13,25 @@ int main() {
 										 "A4,Erin,Black,Erin.black@comcast.net,22,50,58,40,SECURITY",
 										 "A5,Brady,Bassett,bbass38@wgu.edu,20,30,46,52,SOFTWARE" };
 
+	std::string tempStudentId;
+	std::string tempFirstName;
+	std::string tempLastName;
+	std::string tempEmailAddress;
+	int tempAge;
+	int tempClass1;
+	int tempClass2;
+	int tempClass3;
+	DegreeProgram tempDegreeProgram;
 
 	std::cout << "Scripting and Programming - Applications - C867" << std::endl;
 	std::cout << "C++" << std::endl;
 	std::cout << "Brady Bassett - 002616010" << std::endl << std::endl << std::endl;
 
-	//FIXME - Add Roster classRoster; instance
+	Roster classRoster;
 
-	//FIXME - Add each student to the class roster array
+	for (int i = 0; i < sizeof(studentData); i++) {
+		tempStudentId = "l";
+	}
 
 	//FIXME - call print all function from the Roster class
 
