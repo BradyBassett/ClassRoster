@@ -108,9 +108,18 @@ void Student::Print() const {
 	std::cout << "Student Age: " << this->studentAge << std::endl;
 	std::cout << "Days in Each Course: " << std::endl;
 	for (int i = 0; i < 3; i++) {
-		std::cout << "Course " << i << ": " << courses[i] << std::endl;
+		std::cout << "Course " << i + 1 << ": " << courses[i] << std::endl;
 	}
-	std::cout << "Degree Program: " << this->degreeProgram << std::endl;
-
+	switch (this->degreeProgram){
+		case 1:
+			std::cout << "Degree Program: Security" << std::endl;
+			break;
+		case 2:
+			std::cout << "Degree Program: Network" << std::endl;
+			break;
+		case 3:
+			std::cout << "Degree Program: Software" << std::endl;
+			break;
+	}
 	return;
 }

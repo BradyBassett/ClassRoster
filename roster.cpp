@@ -40,18 +40,35 @@ Roster& Roster::operator=(const Roster& source) {
 
 Roster::~Roster() {
 
+	std::cout << std::endl << "DESTRUCTOR CALLED" << std::endl;
 	std::vector<Student>().swap(*classRosterArray);
 
 	return;
 }
 
 void Roster::Add(std::string studentID, std::string firstName, std::string lastName,
-				 std::string emailAddress, int age, int daysInCourse1,
-				 int daysInCourse2, int daysInCourse3, DegreeProgram degreeProgram) {
+				 std::string emailAddress, std::string age, std::string daysInCourse1,
+				 std::string daysInCourse2, std::string daysInCourse3, std::string degreeProgram) {
 	
+	int convertedAge = stoi(age);
+	int convertedDaysInCourse1 = stoi(daysInCourse1);
+	int convertedDaysInCourse2 = stoi(daysInCourse2);
+	int convertedDaysInCourse3 = stoi(daysInCourse3);
+	DegreeProgram convertedDegreeProgram;
+
+	if (degreeProgram == "SECURITY") {
+		convertedDegreeProgram = SECURITY;
+	}
+	else if (degreeProgram == "NETWORK") {
+		convertedDegreeProgram = NETWORK;
+	}
+	else if (degreeProgram == "SOFTWARE") {
+		convertedDegreeProgram = SOFTWARE;
+	}
+
 	Student* student = nullptr;
-	student = new Student(studentID, firstName, lastName, emailAddress, age, daysInCourse1,
-		daysInCourse2, daysInCourse3, degreeProgram);
+	student = new Student(studentID, firstName, lastName, emailAddress, convertedAge, convertedDaysInCourse1,
+		convertedDaysInCourse2, convertedDaysInCourse3, convertedDegreeProgram);
 
 	classRosterArray->push_back(*student);
 
@@ -63,6 +80,8 @@ void Roster::Remove(std::string studentID) {
 
 	for (int i = 0; i < classRosterArray->size(); i++) {
 		if (classRosterArray->at(i).GetStudentId() == studentID) {
+			std::cout << "Student removed" << std::endl << std::endl;
+			
 			classRosterArray->erase(classRosterArray->begin() + i);
 			studentPresent = true;
 			break;
@@ -78,6 +97,8 @@ void Roster::Remove(std::string studentID) {
 
 void Roster::PrintAll() const {
 	
+	std::cout << "All students in roster:" << std::endl << std::endl;
+
 	for (int i = 0; i < classRosterArray->size(); i++) {
 		classRosterArray->at(i).Print();
 		std::cout << std::endl;
@@ -96,7 +117,8 @@ void Roster::PrintAverageDaysInCourse(std::string studentID) const {
 			averageDays += classRosterArray->at(i).GetDaysInCourse2();
 			averageDays += classRosterArray->at(i).GetDaysInCourse3();
 
-			std::cout << "Average number of days in courses: " << averageDays / 3 << std::endl;
+			std::cout << "Average number of days in courses for "<< classRosterArray->at(i).GetFirstName() << 
+				" " << classRosterArray->at(i).GetLastName() << ": " << averageDays / 3 << std::endl;
 
 			studentPresent = true;
 			break;
@@ -115,6 +137,7 @@ void Roster::PrintInvalidEmails() const {
 	std::vector<std::string> invalidEmails;
 	int atPos = -1;
 	int dotPos = -1;
+	std::size_t found;
 	
 	for (int i = 0; i < classRosterArray->size(); i++) {
 		while(valid){
@@ -123,6 +146,15 @@ void Roster::PrintInvalidEmails() const {
 				invalidEmails.push_back(classRosterArray->at(i).GetEmailAddress());
 				break;
 			}
+			for (int j = 0; j < classRosterArray->at(i).GetEmailAddress().length(); j++) {
+				if (classRosterArray->at(i).GetEmailAddress()[j] == ' ') {
+					valid == false;
+					invalidEmails.push_back(classRosterArray->at(i).GetEmailAddress());
+					break;
+				}
+			}
+			atPos = -1;
+			dotPos = -1;
 			for (int j = 0; j < classRosterArray->at(i).GetEmailAddress().length(); j++) {
 				if (classRosterArray->at(i).GetEmailAddress()[j] == '@') {
 					atPos = j;
@@ -146,26 +178,43 @@ void Roster::PrintInvalidEmails() const {
 				invalidEmails.push_back(classRosterArray->at(i).GetEmailAddress());
 				break;
 			}
+			break;
 		}
 		valid = true;
-		int atPos = -1;
-		int dotPos = -1;
 	}
 	if (invalidEmails.size() > 0){
+		std::cout << "Invalid Emails:" << std::endl << std::endl;
 		for (int i = 0; i < invalidEmails.size(); i++) {
-			std::cout << "Invalid Emails:" << std::endl;
 			std::cout << invalidEmails[i] << std::endl;
 		}
+		std::cout << std::endl;
 	}
+	else {
+		std::cout << "No invalid emails" << std::endl << std::endl;
+	}
+
 	return;
 }
 
 void Roster::PrintByDegreeProgram(DegreeProgram degreeProgram) const {
 	bool noMatch = true;
 	
+	switch (degreeProgram) {
+	case SECURITY:
+		std::cout << "Students in the Security degree program: " << std::endl << std::endl;
+		break;
+	case NETWORK:
+		std::cout << "Students in the Network degree program: " << std::endl << std::endl;
+		break;
+	case SOFTWARE:
+		std::cout << "Students in the Software degree program: " << std::endl << std::endl;
+		break;
+	}
+
 	for (int i = 0; i < classRosterArray->size(); i++) {
 		if (classRosterArray->at(i).GetDegreeProgram() == degreeProgram) {
 			classRosterArray->at(i).Print();
+			std::cout << std::endl;
 			noMatch = false;
 		}
 	}
@@ -174,5 +223,15 @@ void Roster::PrintByDegreeProgram(DegreeProgram degreeProgram) const {
 		std::cout << "No students matching that degree program in roster" << std::endl;
 	}
 
+	return;
+}
+
+void Roster::LoopThroughStudentAverages() const {
+	std::cout << "Average number of days in each course:" << std::endl << std::endl;
+	
+	for (int i = 0; i < classRosterArray->size(); i++) {
+		PrintAverageDaysInCourse(classRosterArray->at(i).GetStudentId());
+	}
+	std::cout << std::endl;
 	return;
 }

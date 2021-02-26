@@ -15,14 +15,15 @@ class Roster {
 		~Roster();
 
 		void Add(std::string studentID, std::string firstName, std::string lastName, 
-				 std::string emailAddress, int age, int daysInCourse1, 
-				 int daysInCourse2, int daysInCourse3, DegreeProgram degreeProgram);
+				 std::string emailAddress, std::string age, std::string daysInCourse1,
+				 std::string daysInCourse2, std::string daysInCourse3, std::string degreeProgram);
 		void Remove(std::string studentID);
 
 		void PrintAll() const;
 		void PrintAverageDaysInCourse(std::string studentID) const;
 		void PrintInvalidEmails() const;
 		void PrintByDegreeProgram(DegreeProgram degreeProgram) const;
+		void LoopThroughStudentAverages() const;
 
 	private:
 		std::vector<Student>* classRosterArray;
