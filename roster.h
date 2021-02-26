@@ -27,7 +27,6 @@ class Roster {
 
 	private:
 		std::vector<Student>* classRosterArray;
-		
 };
 
 #endif
