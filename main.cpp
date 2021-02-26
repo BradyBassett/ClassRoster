@@ -8,6 +8,7 @@
 
 
 int main() {
+	// provided student data table
 	const int DATASIZE = 5;
 	const std::string studentData[DATASIZE] = { "A1,John,Smith,John1989@gm ail.com,20,30,35,40,SECURITY",
 												"A2,Suzan,Erickson,Erickson_1990@gmailcom,19,50,30,40,NETWORK",
@@ -19,8 +20,11 @@ int main() {
 	std::cout << "C++" << std::endl;
 	std::cout << "Brady Bassett - 002616010" << std::endl << std::endl << std::endl;
 
+	// Declaration of classRoster object of type Roster
 	Roster classRoster;
 
+	// Using a stringstream to parse through each string at each index within the data table and assigning the parsed data to
+	// a student pointer using the Add() function
 	for (int i = 0; i < DATASIZE; i++) {
 		std::string extractedData = studentData[i];
 		std::vector<std::string> parsedData;
@@ -34,6 +38,7 @@ int main() {
 			parsedData[5], parsedData[6], parsedData[7], parsedData[8]);
 	}
 
+	// Main functionality check
 	classRoster.PrintAll();
 	std::cout << std::endl;
 	classRoster.PrintInvalidEmails();

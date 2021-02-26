@@ -3,6 +3,7 @@
 
 #include "student.h"
 
+// Constructor
 Student::Student(std::string studentID, std::string firstName, std::string lastName,
 				 std::string emailAddress, int studentAge, int daysInCourse1,
 				 int daysInCourse2, int daysInCourse3, DegreeProgram degreeProgram) {
@@ -19,6 +20,7 @@ Student::Student(std::string studentID, std::string firstName, std::string lastN
 	return;
 }
 
+// Mutators
 void Student::SetStudentID(std::string studentID) {
 	this->studentID = studentID;
 
@@ -63,6 +65,7 @@ void Student::SetDegreeProgram(DegreeProgram degreeProgram) {
 	return;
 }
 
+// Accessors
 std::string Student::GetStudentId() const {
 	return this->studentID;
 }
@@ -99,6 +102,7 @@ DegreeProgram Student::GetDegreeProgram() const {
 	return this->degreeProgram;
 }
 
+// Function to print out all of a students associated data
 void Student::Print() const {
 	int courses[]{ this->daysInCourse1, this->daysInCourse2, this->daysInCourse3 };
 

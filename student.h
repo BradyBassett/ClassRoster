@@ -7,10 +7,12 @@
 
 class Student {
 	public:
+		// Constructor
 		Student(std::string studentID = "none", std::string firstName = "none", std::string lastName = "none",
 				std::string emailAddress = "none", int studentAge = -1, int daysInCourse1 = -1, 
 				int daysInCourse2 = -1, int daysInCourse3 = -1, DegreeProgram degreeProgram = NONE);
 
+		// Mutators
 		void SetStudentID(std::string studentID);
 		void SetFirstName(std::string firstName);
 		void SetLastName(std::string lastName);
@@ -19,6 +21,7 @@ class Student {
 		void SetDaysInCourses(int course1, int course2, int course3);
 		void SetDegreeProgram(DegreeProgram degreeProgram);
 
+		// Accessors
 		std::string GetStudentId() const;
 		std::string GetFirstName() const;
 		std::string GetLastName() const;
@@ -29,6 +32,7 @@ class Student {
 		int GetDaysInCourse3() const;
 		DegreeProgram GetDegreeProgram() const;
 
+		// Prints out all data members associated with the student object
 		void Print() const;
 
 	private:
